@@ -1,3 +1,5 @@
+import { convertToDateObj } from './parseDate.js'
+
 const url = 'https://tikkio.com/manager/events'
 
 // .env constants
@@ -18,6 +20,13 @@ const eventSelector = '.event-bar-row'
 
 export async function scrapeEvents(browser) {
   const page = await browser.newPage()
+
+  // Expose convertToDate function to page context
+  page.exposeFunction('convertToDate', (dateString) => {
+    let parts = dateString.split('.')
+    return new Date(parts[2], parts[1] - 1, parts[0])
+  })
+
   console.log(`Navigating to ${url}...`)
   await page.goto(url)
 
@@ -44,7 +53,7 @@ export async function scrapeEvents(browser) {
   await page.waitForSelector(eventsLoadedID)
   console.log('Events done loading')
 
-  const eventlist = await page.$$eval(eventSelector, (events) => {
+  let eventList = await page.$$eval(eventSelector, (events) => {
     const eventDate = '.event-date'
     const eventName = '.event-name'
     const eventTicketsSold = '.sold'
@@ -53,6 +62,7 @@ export async function scrapeEvents(browser) {
       event['date'] = event
         .querySelector(eventDate)
         .textContent.replace(/^\s+|\s+$/g, '')
+
       event['name'] = event
         .querySelector(eventName)
         .textContent.replace(/^\s+|\s+$/g, '')
@@ -62,6 +72,11 @@ export async function scrapeEvents(browser) {
     return events
   })
 
+  // Convert date strings to date objects
+  eventList.forEach((event) => {
+    event['dateObj'] = convertToDateObj(event['date'])
+  })
+
   await browser.close()
-  return eventlist
+  return eventList
 }

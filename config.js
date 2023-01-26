@@ -1,6 +1,6 @@
-import dotenv from 'dotenv'
-dotenv.config({ path: '.env' })
+import dotenv from "dotenv";
+dotenv.config({ path: ".env" });
 
 if (!process.env.EMAIL) {
-  throw new Error('ENV variables not set')
+  throw new Error("ENV variables not set");
 }
