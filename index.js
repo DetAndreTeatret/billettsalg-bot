@@ -1,5 +1,6 @@
 import './config.js'
-import { getEvents } from './scraper/scraper.js'
+import { getEvents, getArchivedEvents } from './scraper/scraper.js'
+import { writeToFile } from './scraper/writeToFile.js'
 import {
   filterDates,
   mondayThisWeek,
@@ -7,8 +8,9 @@ import {
 } from './scraper/parseDate.js'
 
 // Get events
+
 const eventList = await getEvents()
 
-// Filter events this week
+//Filter events this week
 let eventsThisWeek = filterDates(eventList, mondayThisWeek(), sundayThisWeek())
-console.log(eventsThisWeek)
+onsole.log(eventsThisWeek)

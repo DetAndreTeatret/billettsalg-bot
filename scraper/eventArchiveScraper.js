@@ -1,6 +1,6 @@
 import { convertToDateObj } from './parseDate.js'
 
-const url = 'https://tikkio.com/manager/events'
+const url = 'https://tikkio.com/manager/events/expired'
 
 // .env constants
 const email = process.env.EMAIL
@@ -18,7 +18,7 @@ const eventSelector = '.event-bar-row'
 
 // scraper function events
 
-export async function scrapeEvents(browser) {
+export async function scrapeArchivedEvents(browser) {
   const page = await browser.newPage()
 
   // Expose convertToDate function to page context
