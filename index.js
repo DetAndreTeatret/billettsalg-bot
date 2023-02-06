@@ -6,6 +6,7 @@ import {
   mondayThisWeek,
   sundayThisWeek,
 } from './scraper/parseDate.js'
+import { postEventsToDiscord } from './discord_bot/discordBot.js'
 
 // Get events
 
@@ -13,4 +14,9 @@ const eventList = await getEvents()
 
 //Filter events this week
 let eventsThisWeek = filterDates(eventList, mondayThisWeek(), sundayThisWeek())
-onsole.log(eventsThisWeek)
+
+//console.log(eventsThisWeek)
+//Post events to discord-channel
+await postEventsToDiscord(eventsThisWeek)
+
+process.exit()

@@ -2,7 +2,7 @@
   "name": "billettsalg-bot",
   "version": "1.0.0",
   "description": "Bot til discord som oppdaterer om billettsalg på Det Andre Teatret",
-  "main": "discordBot.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
