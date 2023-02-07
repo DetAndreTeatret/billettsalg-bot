@@ -6,6 +6,10 @@ import {
 } from '../scraper/parseDate.js'
 
 export function buildEmbeddedMessage(eventList) {
+  let now = new Date()
+  let currentDate = now.toLocaleDateString('no-NO')
+  let currentTime = now.toLocaleTimeString('no-NO')
+
   let ticketSaleMsg = new EmbedBuilder()
     .setColor('#872c99')
     .setDescription('\u200B\n ')
@@ -13,7 +17,10 @@ export function buildEmbeddedMessage(eventList) {
     .setThumbnail(
       'https://www.detandreteatret.no/uploads/assets/images/Stemning/_800x800_crop_center-center_82_none/andre-teatret-logo.png?mtime=1583149819'
     )
-    .addFields()
+    .addFields({
+      name: ' ',
+      value: 'Oppdatert ' + currentDate + ' kl. ' + currentTime,
+    })
 
   let totalSold = 0
 
@@ -37,8 +44,3 @@ export function buildEmbeddedMessage(eventList) {
 
   return ticketSaleMsg
 }
-
-export let testEmbed = new EmbedBuilder().setTitle('funker dette?').addFields({
-  name: 'test',
-  value: 'testvalue',
-})

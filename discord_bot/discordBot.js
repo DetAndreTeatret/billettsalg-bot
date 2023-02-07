@@ -1,9 +1,9 @@
-import { Client, EmbedBuilder, Events, GatewayIntentBits } from 'discord.js'
+import { Client, Events, GatewayIntentBits } from 'discord.js'
 import { buildEmbeddedMessage } from './embedTickets.js'
 
 const token = process.env.BOT_TOKEN
-const guildID = '1069389599400525834'
-const channelID = '1069389703230529607'
+const guildID = process.env.GUILD_ID
+const channelID = process.env.CHANNEL_ID
 
 export async function postEventsToDiscord(eventList) {
   // Create a new client instance
@@ -33,14 +33,17 @@ export async function postEventsToDiscord(eventList) {
 
   // If embedded message exists, delete it first
   if (botMessage != undefined) {
-    console.log('message exists')
+    console.log('editing message')
     //console.log(botMessage)
-    await botMessage.delete()
+    await botMessage.edit({
+      embeds: [buildEmbeddedMessage(eventList)],
+    })
+  } else {
+    // Send new updated message
+    await channel.send({
+      embeds: [buildEmbeddedMessage(eventList)],
+    })
   }
 
   console.log('sending message')
-  // Send new updated message
-  await channel.send({
-    embeds: [buildEmbeddedMessage(eventList)],
-  })
 }
