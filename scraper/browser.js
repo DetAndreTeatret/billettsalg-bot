@@ -5,6 +5,6 @@ export async function startBrowser() {
     headless: true,
     args: ['--disable-setuid-sandbox'],
     ignoreHTTPSErrors: true,
-    DISPLAY: ':10.0',
+    //DISPLAY: ':10.0',
   })
 }
