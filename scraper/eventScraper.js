@@ -21,10 +21,24 @@ const eventSelector = '.event-bar-row'
 export async function scrapeEvents(browser) {
   const page = await browser.newPage()
 
-  // Expose convertToDate function to page context
-  page.exposeFunction('convertToDate', (dateString) => {
-    let parts = dateString.split('.')
-    return new Date(parts[2], parts[1] - 1, parts[0])
+  // Stop images/css/fonts from loading
+  await page.setRequestInterception(true)
+  page.on('request', (req) => {
+    if (
+      req.resourceType() === 'image' ||
+      req.resourceType() === 'font' ||
+      req.resourceType() === 'stylesheet'
+    ) {
+      req.abort()
+    } else {
+      req.continue()
+    }
+  })
+
+  //Minimize display size
+  await page.setViewport({
+    width: 640,
+    height: 480,
   })
 
   console.log(`Navigating to ${url}...`)
