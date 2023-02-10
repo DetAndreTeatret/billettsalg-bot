@@ -41,21 +41,15 @@ export function filterDates(eventList, startDate, endDate) {
   )
 }
 
-export let eventListTest = [
-  { date: '01.01.2023', name: 'Lykke til, Cathrine Frost!', sold: '6' },
-  { date: '04.01.2023', name: 'Fredagsfilmen', sold: '41' },
-  { date: '06.01.2023', name: 'Instant Broadway', sold: '10' },
-  { date: '23.01.2023', name: 'Folka', sold: '20' },
-  { date: '25.01.2023', name: 'Steikje Løye', sold: '15' },
-  { date: '27.01.2023', name: 'Såvidt en hit', sold: '45' },
-]
-
 ///// For testing purposes only
 
-// convert datestrings to javascript Date objects
-// eventListTest.forEach((event) => {
-//   event['date'] = convertToDate(event['date'])
-// })
-
-// console.log(filterDates(eventListTest, mondayThisWeek(), sundayThisWeek()))
-//console.log(thisWeek())
+export let eventListTest = [
+  { date: '06.02.2023', name: 'Lykke til, Cathrine Frost!', sold: '6' },
+  { date: '07.02.2023', name: 'Fredagsfilmen', sold: '41' },
+  { date: '08.02.2023', name: 'Instant Broadway', sold: '10' },
+  { date: '09.02.2023', name: 'Folka', sold: '20' },
+  { date: '10.02.2023', name: 'Steikje Løye', sold: '15' },
+  { date: '11.02.2023', name: 'Såvidt en hit', sold: '45' },
+]
+//console.log(filterDates(eventListTest, mondayThisWeek(), sundayThisWeek()))
+//console.log(mondayThisWeek())

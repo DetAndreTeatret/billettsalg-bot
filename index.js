@@ -15,8 +15,8 @@ const eventList = await getEvents()
 //Filter events this week
 let eventsThisWeek = filterDates(eventList, mondayThisWeek(), sundayThisWeek())
 
-//console.log(eventsThisWeek)
 //Post events to discord-channel
+
 await postEventsToDiscord(eventsThisWeek)
 
 process.exit()
