@@ -1,6 +1,5 @@
 import { EmbedBuilder } from 'discord.js'
 import {
-  thisWeek,
   convertToDateObj,
   capitalizeFirstLetter,
   getWeek,
