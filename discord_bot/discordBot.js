@@ -30,18 +30,25 @@ export async function postEventsToDiscord(eventList) {
   let botMessage = await messages.find(
     (message) => message.author.username === 'Billettsalg'
   )
+  let updatedMessage = buildEmbeddedMessage(eventList)
 
   // If embedded message exists, delete it first
   if (botMessage != undefined) {
     console.log('editing message')
     //console.log(botMessage)
     await botMessage.edit({
-      embeds: [buildEmbeddedMessage(eventList)],
+      embeds: [updatedMessage],
     })
+
+    //Remove reactions when displaying new week
+    if (botMessage.embeds.title !== updatedMessage.title) {
+      console.log('removing reactions')
+      await botMessage.reactions.removeAll()
+    }
   } else {
     // Send new updated message
     await channel.send({
-      embeds: [buildEmbeddedMessage(eventList)],
+      embeds: [updatedMessage],
     })
   }
 
