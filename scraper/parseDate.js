@@ -26,13 +26,13 @@ export function sundayThisWeek() {
   return sunday
 }
 
-export function thisWeek() {
-  let currentDate = new Date()
-  let startDate = new Date(currentDate.getFullYear(), 0, 1)
-  let days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000))
-  let weekNumber = Math.ceil(days / 7)
-
-  return weekNumber
+export function getWeek(inputDate) {
+  let d = inputDate
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()))
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7))
+  var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1))
+  var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7)
+  return weekNo
 }
 
 export function filterDates(eventList, startDate, endDate) {
@@ -52,4 +52,3 @@ export let eventListTest = [
   { date: '11.02.2023', name: 'Såvidt en hit', sold: '45' },
 ]
 //console.log(filterDates(eventListTest, mondayThisWeek(), sundayThisWeek()))
-//console.log(mondayThisWeek())

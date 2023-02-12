@@ -3,6 +3,7 @@ import {
   thisWeek,
   convertToDateObj,
   capitalizeFirstLetter,
+  getWeek,
 } from '../scraper/parseDate.js'
 
 export function buildEmbeddedMessage(eventList) {
@@ -13,7 +14,7 @@ export function buildEmbeddedMessage(eventList) {
   let ticketSaleMsg = new EmbedBuilder()
     .setColor('#872c99')
     .setDescription('Oppdatert ' + currentDate + ' kl. ' + currentTime)
-    .setTitle('Billettsalg uke ' + thisWeek())
+    .setTitle('Billettsalg uke ' + getWeek(eventList[0].dateObj))
     .setThumbnail(
       'https://www.detandreteatret.no/uploads/assets/images/Stemning/_800x800_crop_center-center_82_none/andre-teatret-logo.png?mtime=1583149819'
     )
