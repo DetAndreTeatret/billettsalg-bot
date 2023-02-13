@@ -41,7 +41,7 @@ export async function postEventsToDiscord(eventList) {
     })
 
     //Remove reactions when displaying new week
-    if (botMessage.embeds.title !== updatedMessage.title) {
+    if (botMessage.embeds[0].data.title != updatedMessage.data.title) {
       console.log('removing reactions')
       await botMessage.reactions.removeAll()
     }
