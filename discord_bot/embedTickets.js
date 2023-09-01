@@ -3,7 +3,7 @@ import {
   convertToDateObj,
   capitalizeFirstLetter,
   getWeek,
-} from '../scraper/parseDate.js'
+} from '../date_utils/parseDate.js'
 
 export function buildEmbeddedMessage(eventList) {
   let now = new Date()
@@ -13,7 +13,7 @@ export function buildEmbeddedMessage(eventList) {
   let ticketSaleMsg = new EmbedBuilder()
     .setColor('#872c99')
     .setDescription('Oppdatert ' + currentDate + ' kl. ' + currentTime)
-    .setTitle('Billettsalg uke ' + getWeek(eventList[0].dateObj))
+    .setTitle('Billettsalg uke ' + getWeek(eventList[0].date))
     .setThumbnail(
       'https://www.detandreteatret.no/uploads/assets/images/Stemning/_800x800_crop_center-center_82_none/andre-teatret-logo.png?mtime=1583149819'
     )
@@ -26,15 +26,20 @@ export function buildEmbeddedMessage(eventList) {
 
   eventList.forEach((event) => {
     totalSold = totalSold + Number(event.sold)
-    let eventDateObj = convertToDateObj(event.date)
+    let eventDateObj = event.date
+
     let dateName = eventDateObj.toLocaleDateString('no-NO', { weekday: 'long' })
+    let dateDay = eventDateObj.getDate().toString()
+    let dateMonth = eventDateObj.getMonth().toString()
 
     ticketSaleMsg.addFields({
-      value: event.sold,
+      value: event.sold.toString(),
       name:
         capitalizeFirstLetter(dateName).slice(0, -3) +
         ' ' +
-        event.date.slice(0, -5) +
+        dateDay +
+        '.' +
+        dateMonth +
         '   -   ' +
         event.name,
     })

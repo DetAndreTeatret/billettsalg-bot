@@ -1,4 +1,4 @@
-import { convertToDateObj } from './parseDate.js'
+import { convertToDateObj } from '../date_utils/parseDate.js'
 
 const url = 'https://tikkio.com/manager/events'
 

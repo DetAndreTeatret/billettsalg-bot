@@ -12,16 +12,16 @@ export function mondayThisWeek() {
   let today = new Date()
   let monday = new Date()
   let mondayNumMonth = today.getDate() - today.getDay() + 1
-
   monday.setDate(mondayNumMonth)
-  //let mondayFormatted = monday.toLocaleDateString("no-NO")
+
   return monday
 }
 
 export function sundayThisWeek() {
+  let today = new Date()
   let sunday = new Date()
-  let monday = mondayThisWeek()
-  sunday.setDate(monday.getDate() + 6)
+  let sundayNumMonth = today.getDate() - today.getDay() + 7
+  sunday.setDate(sundayNumMonth)
 
   return sunday
 }
@@ -37,8 +37,21 @@ export function getWeek(inputDate) {
 
 export function filterDates(eventList, startDate, endDate) {
   return eventList.filter(
-    (event) => event['dateObj'] >= startDate && event['dateObj'] <= endDate
+    (event) =>
+      event.date.getTime() >= startDate.getTime() &&
+      event.date.getTime() <= endDate.getTime()
   )
+}
+
+export function dateToString(dateObj) {
+  // Get year, month, and day part from the date
+  var year = dateObj.toLocaleString('default', { year: 'numeric' })
+  var month = dateObj.toLocaleString('default', { month: '2-digit' })
+  var day = dateObj.toLocaleString('default', { day: '2-digit' })
+
+  // Generate yyyy-mm-dd date string
+  var formattedDateString = year + '-' + month + '-' + day
+  return formattedDateString
 }
 
 ///// For testing purposes only
