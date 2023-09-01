@@ -22,6 +22,7 @@ export function sundayThisWeek() {
   let sunday = new Date()
   let sundayNumMonth = today.getDate() - today.getDay() + 7
   sunday.setDate(sundayNumMonth)
+  sunday.setHours(23, 59, 0, 0)
 
   return sunday
 }
