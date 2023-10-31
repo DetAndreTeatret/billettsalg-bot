@@ -14,7 +14,9 @@
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
     "moment": "^2.29.4",
-    "prettier": "^2.8.3",
     "puppeteer": "^19.5.2"
+  },
+  "devDependencies": {
+    "eslint-config-dat": "1.0.1"
   }
 }

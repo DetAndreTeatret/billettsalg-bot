@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "extends": [
+    "eslint-config-dat"
+  ],
+  "rules": {
+    "no-undef": "off"
+  }
+}

@@ -1,5 +1,5 @@
-import { Client, Events, GatewayIntentBits } from 'discord.js'
-import { buildEmbeddedMessage } from './embedTickets.js'
+import { Client, Events, GatewayIntentBits } from "discord.js"
+import { buildEmbeddedMessage } from "./embedTickets.js"
 
 const token = process.env.BOT_TOKEN
 const guildID = process.env.GUILD_ID
@@ -13,7 +13,7 @@ export async function postEventsToDiscord(eventList) {
 
   // When the client is ready, run this code (only once)
   // We use 'c' for the event parameter to keep it separate
-  //from the already defined 'client'
+  // from the already defined 'client'
   client.once(Events.ClientReady, (c) => {
     console.log(`Ready! Logged in as ${c.user.tag}`)
   })
@@ -21,28 +21,28 @@ export async function postEventsToDiscord(eventList) {
   // Log in to Discord with your client's token
   client.login(token)
 
-  //Get channel ID for "billettsalg"s
-  let guild = await client.guilds.fetch(guildID)
-  //channels = channels.map((c) => c.type === 'GUILD_TEXT'
-  let channel = await guild.channels.fetch(channelID)
-  let messages = await channel.messages.fetch()
+  // Get channel ID for "billettsalg"s
+  const guild = await client.guilds.fetch(guildID)
+  // channels = channels.map((c) => c.type === 'GUILD_TEXT'
+  const channel = await guild.channels.fetch(channelID)
+  const messages = await channel.messages.fetch()
 
-  let botMessage = await messages.find(
-    (message) => message.author.username === 'Billettsalg'
+  const botMessage = await messages.find(
+    (message) => message.author.username === "Billettsalg"
   )
-  let updatedMessage = buildEmbeddedMessage(eventList)
+  const updatedMessage = buildEmbeddedMessage(eventList)
 
   // If embedded message exists, delete it first
-  if (botMessage != undefined) {
-    console.log('editing message')
-    //console.log(botMessage)
+  if (botMessage !== undefined) {
+    console.log("editing message")
+    // console.log(botMessage)
     await botMessage.edit({
       embeds: [updatedMessage],
     })
 
-    //Remove reactions when displaying new week
-    if (botMessage.embeds[0].data.title != updatedMessage.data.title) {
-      console.log('removing reactions')
+    // Remove reactions when displaying new week
+    if (botMessage.embeds[0].data.title !== updatedMessage.data.title) {
+      console.log("removing reactions")
       await botMessage.reactions.removeAll()
     }
   } else {
@@ -52,5 +52,5 @@ export async function postEventsToDiscord(eventList) {
     })
   }
 
-  console.log('sending message')
+  console.log("sending message")
 }

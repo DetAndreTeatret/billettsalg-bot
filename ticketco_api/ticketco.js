@@ -1,12 +1,12 @@
 // API URL
-const ticketco_endpoint = 'https://ticketco.events:443/api/public/v1/events?'
+const ticketco_endpoint = "https://ticketco.events:443/api/public/v1/events?"
 
 // .env constants
 const ticketcoToken = process.env.API_TOKEN
 
 export async function getEventsTicketCo() {
-  let requestURL =
-    ticketco_endpoint + 'token=' + ticketcoToken + '&status=active'
+  const requestURL =
+    ticketco_endpoint + "token=" + ticketcoToken + "&status=active"
   /*
     '&start_at=' +
     startDate +
@@ -15,7 +15,7 @@ export async function getEventsTicketCo() {
     */
 
   const response = await fetch(requestURL)
-  console.log('Requesting data from TicketCo API')
+  console.log("Requesting data from TicketCo API")
   const eventData = await response.json()
 
   const filteredEvents = eventData.events.map((event) => ({
@@ -25,6 +25,6 @@ export async function getEventsTicketCo() {
     sold: event.total_sold,
   }))
 
-  console.log('Data received')
+  console.log("Data received")
   return filteredEvents
 }
