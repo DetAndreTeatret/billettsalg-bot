@@ -3,7 +3,7 @@
   "extends": [
     "eslint-config-dat"
   ],
-  "rules": {
-    "no-undef": "off"
+  "env": {
+    "node": true
   }
 }
