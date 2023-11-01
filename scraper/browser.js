@@ -1,10 +1,10 @@
-import puppeteer from 'puppeteer'
+import puppeteer from "puppeteer"
 
 export async function startBrowser() {
   return puppeteer.launch({
     headless: true,
-    args: ['--disable-setuid-sandbox'],
+    args: ["--disable-setuid-sandbox"],
     ignoreHTTPSErrors: true,
-    //DISPLAY: ':10.0',
+    // DISPLAY: ':10.0',
   })
 }
