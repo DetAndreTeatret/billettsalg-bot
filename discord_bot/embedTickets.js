@@ -29,7 +29,8 @@ export function buildEmbeddedMessage(eventList) {
 
     const dateName = eventDateObj.toLocaleDateString("no-NO", { weekday: "long" })
     const dateDay = eventDateObj.getDate().toString()
-    const dateMonth = eventDateObj.getMonth().toString()
+    // Months are zero indexed, so we add one before we display
+    const dateMonth = (eventDateObj.getMonth() + 1).toString()
 
     ticketSaleMsg.addFields({
       value: event.sold.toString(),
