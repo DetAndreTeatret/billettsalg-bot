@@ -11,38 +11,33 @@ export async function postEventsToDiscord(eventList) {
     intents: [GatewayIntentBits.Guilds],
   })
 
-  // When the client is ready, run this code (only once)
-  // We use 'c' for the event parameter to keep it separate
-  // from the already defined 'client'
   client.once(Events.ClientReady, (c) => {
-    console.log(`Ready! Logged in as ${c.user.tag}`)
+    console.log(`Discord bot ready! Logged in as ${c.user.tag}`)
   })
 
-  // Log in to Discord with your client's token
-  client.login(token)
+  await client.login(token)
 
   // Get channel ID for "billettsalg"s
   const guild = await client.guilds.fetch(guildID)
-  // channels = channels.map((c) => c.type === 'GUILD_TEXT'
   const channel = await guild.channels.fetch(channelID)
   const messages = await channel.messages.fetch()
 
   const botMessage = await messages.find(
-    (message) => message.author.username === "Billettsalg"
+    (message) => message.author.id === client.user.id
   )
+
   const updatedMessage = buildEmbeddedMessage(eventList)
 
   // If embedded message exists, delete it first
   if (botMessage !== undefined) {
-    console.log("editing message")
-    // console.log(botMessage)
+    console.log("Editing message...")
     await botMessage.edit({
       embeds: [updatedMessage],
     })
 
     // Remove reactions when displaying new week
     if (botMessage.embeds[0].data.title !== updatedMessage.data.title) {
-      console.log("removing reactions")
+      console.log("Removing reactions...")
       await botMessage.reactions.removeAll()
     }
   } else {
@@ -52,5 +47,5 @@ export async function postEventsToDiscord(eventList) {
     })
   }
 
-  console.log("sending message")
+  console.log("Sending message...")
 }
