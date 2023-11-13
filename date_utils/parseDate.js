@@ -11,7 +11,7 @@ export function capitalizeFirstLetter(string) {
 export function mondayThisWeek() {
   let today = new Date()
   let monday = new Date()
-  let mondayNumMonth = today.getDate() - (today.getDay() === 0 ? 7 : 0) + 1
+  let mondayNumMonth = today.getDate() - (today.getDay() === 0 ? 7 : today.getDay()) + 1
   monday.setDate(mondayNumMonth)
 
   return monday
@@ -20,7 +20,7 @@ export function mondayThisWeek() {
 export function sundayThisWeek() {
   let today = new Date()
   let sunday = new Date()
-  let sundayNumMonth = today.getDate() - (today.getDay() === 0 ? 7 : 0) + 7
+  let sundayNumMonth = today.getDate() - (today.getDay() === 0 ? 7 : today.getDay()) + 7
   sunday.setDate(sundayNumMonth)
   sunday.setHours(23, 59, 0, 0)
 
