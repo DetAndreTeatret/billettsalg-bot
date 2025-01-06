@@ -4,15 +4,21 @@ import {
   getWeek,
 } from "../date_utils/parseDate.js"
 
+const coolFaces = ["(♥_♥)", "ˁ˚ᴥ˚ˀ", "~(‾▿‾)~", "(╭ರ_•́)", "( ͡° ͜ʖ ͡°)", "(>.<)", "ʕ⌐■ᴥ■ʔ"]
+
 export function buildEmbeddedMessage(eventList) {
   const now = new Date()
   const currentDate = now.toLocaleDateString("no-NO")
   const currentTime = now.toLocaleTimeString("no-NO")
 
+
+  let title = "Ingen forestillinger denne uken! (Uke " + getWeek(now) + ") "
+  if(eventList.length > 0) title = "Billettsalg uke " + getWeek(eventList[0].date)
+
   const ticketSaleMsg = new EmbedBuilder()
     .setColor("#872c99")
     .setDescription("Oppdatert " + currentDate + " kl. " + currentTime)
-    .setTitle("Billettsalg uke " + getWeek(eventList[0].date))
+    .setTitle(title)
     .setThumbnail(
       "https://www.detandreteatret.no/uploads/assets/images/Stemning/_800x800_crop_center-center_82_none/andre-teatret-logo.png?mtime=1583149819"
     )
@@ -45,7 +51,15 @@ export function buildEmbeddedMessage(eventList) {
     })
   })
 
-  ticketSaleMsg.setFooter({ text: "\u200B\n Totalt solgt: " + totalSold })
+  if (eventList.length === 0) {
+    ticketSaleMsg.addFields({
+      name: "Det kommer vel forestillinger snart?",
+      value: coolFaces[Math.floor(Math.random() * coolFaces.length)]
+    })
+  }
+
+  if (totalSold > 0) ticketSaleMsg.setFooter({ text: "\u200B\n Totalt solgt: " + totalSold })
+  else ticketSaleMsg.setFooter({ text: "\u200B\n Ingen billetter å selge denne uka..."})
 
   return ticketSaleMsg
 }
