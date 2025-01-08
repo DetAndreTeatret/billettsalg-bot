@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "eslint .",
+    "lintFix": "eslint . --fix"
   },
   "author": "Håvard Gressum Antonsen",
   "license": "MIT",
@@ -16,6 +18,9 @@
     "puppeteer": "^23.0.0"
   },
   "devDependencies": {
-    "eslint-config-dat": "1.1.2"
+    "eslint": "9.17.0",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.15.0",
+    "eslint-config-dat": "1.1.8"
   }
 }

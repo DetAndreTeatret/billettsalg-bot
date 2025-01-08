@@ -13,7 +13,7 @@ export function buildEmbeddedMessage(eventList) {
 
 
   let title = "Ingen forestillinger denne uken! (Uke " + getWeek(now) + ") "
-  if(eventList.length > 0) title = "Billettsalg uke " + getWeek(eventList[0].date)
+  if (eventList.length > 0) title = "Billettsalg uke " + getWeek(eventList[0].date)
 
   const ticketSaleMsg = new EmbedBuilder()
     .setColor("#872c99")
