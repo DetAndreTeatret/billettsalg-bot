@@ -59,7 +59,7 @@ export function buildEmbeddedMessage(eventList) {
   }
 
   if (totalSold > 0) ticketSaleMsg.setFooter({ text: "\u200B\n Totalt solgt: " + totalSold })
-  else ticketSaleMsg.setFooter({ text: "\u200B\n Ingen billetter å selge denne uka..."})
+  else ticketSaleMsg.setFooter({ text: "\u200B\n Ingen billetter å selge..."})
 
   return ticketSaleMsg
 }
