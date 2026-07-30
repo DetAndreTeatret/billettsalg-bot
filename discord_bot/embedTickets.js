@@ -53,7 +53,7 @@ export function buildEmbeddedMessage(eventList) {
 
   if (eventList.length === 0) {
     ticketSaleMsg.addFields({
-      name: "Det kommer vel forestillinger snart?",
+      name: "Det kommer vel noen forestillinger snart?",
       value: coolFaces[Math.floor(Math.random() * coolFaces.length)]
     })
   }
