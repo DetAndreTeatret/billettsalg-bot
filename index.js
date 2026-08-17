@@ -1,19 +1,11 @@
 import "./config.js"
-import {
-  filterDates,
-  mondayThisWeek,
-  sundayThisWeek,
-} from "./date_utils/parseDate.js"
 import { postEventsToDiscord } from "./discord_bot/discordBot.js"
-import { getEventsTicketCo } from "./ticketco_api/ticketco.js"
+import { getEventsTickster } from "./tickster_api/tickster.js";
 
-// Get events TICKETCO
-const eventList = await getEventsTicketCo()
-
-// Filter events this week
-let eventsThisWeek = filterDates(eventList, mondayThisWeek(), sundayThisWeek())
+// Get events Tickster, filtered to this weeks shows only
+const eventList = await getEventsTickster()
 
 // Post to Discord
-await postEventsToDiscord(eventsThisWeek)
+await postEventsToDiscord(eventList)
 
 process.exit()
